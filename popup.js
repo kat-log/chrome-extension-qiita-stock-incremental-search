@@ -9,12 +9,12 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 });
 
 function checkElement() {
-  var elements = document.getElementsByClassName("style-ss550t");
+  let elements = document.getElementsByClassName("style-ss550t");
   return elements.length > 0;
 }
 
 function handleResult(result) {
-  var statusElement = document.getElementById("status");
+  let statusElement = document.getElementById("status");
   if (result && result[0].result) {
     statusElement.textContent =
       "ストックのポップアップ（style-ss550t）が見つかりました！フォームが表示されてない場合、ページが完全に読み込まれてから再度ポップアップしてみてください🙇🙇";
