@@ -54,14 +54,6 @@ let observer = new MutationObserver((mutations) => {
             newDiv.appendChild(input);
             element.parentNode.insertBefore(newDiv, element.nextSibling);
           }
-          let fallbackElements = node.getElementsByClassName("style-ymuwam");
-          for (let i = 0; i < fallbackElements.length; i++) {
-            let element = fallbackElements[i];
-            let newP = document.createElement("p");
-            newP.style.fontSize = "36px";
-            newP.textContent = "見つかりませんでした";
-            element.parentNode.insertBefore(newP, element.nextSibling);
-          }
         }
       });
     }
