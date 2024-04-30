@@ -1,3 +1,22 @@
+// スタイルを追加するための関数
+function addStyle(styles) {
+  var css = document.createElement("style");
+  css.type = "text/css";
+
+  if (css.styleSheet) css.styleSheet.cssText = styles;
+  else css.appendChild(document.createTextNode(styles));
+
+  document.getElementsByTagName("head")[0].appendChild(css);
+}
+
+// スタイルを追加
+addStyle(
+  ".chrome-extension-qiita-incremental-search { padding: 16px 16px 0px; }"
+);
+addStyle(
+  ".chrome-extension-qiita-incremental-search-text { font-size: 16px; }"
+);
+
 var observer = new MutationObserver(function (mutations) {
   mutations.forEach(function (mutation) {
     if (mutation.addedNodes) {
@@ -9,10 +28,14 @@ var observer = new MutationObserver(function (mutations) {
             var element = elements[i];
             var newDiv = document.createElement("div");
             newDiv.className = "chrome-extension-qiita-incremental-search";
-            newDiv.textContent = "絞り込み：";
+            var newText = document.createElement("span");
+            newText.className =
+              "chrome-extension-qiita-incremental-search-text";
+            newText.textContent = "絞り込み：";
             var input = document.createElement("input");
             input.type = "text";
             input.addEventListener("input", filterList);
+            newDiv.appendChild(newText);
             newDiv.appendChild(input);
             element.parentNode.insertBefore(newDiv, element.nextSibling);
           }
