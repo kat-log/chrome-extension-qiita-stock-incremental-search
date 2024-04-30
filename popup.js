@@ -1,4 +1,4 @@
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   chrome.scripting.executeScript(
     {
       target: { tabId: tabs[0].id },
@@ -13,7 +13,7 @@ function checkElement() {
   return elements.length > 0;
 }
 
-function handleResult(result) {
+let handleResult = (result) => {
   let statusElement = document.getElementById("status");
   if (result && result[0].result) {
     statusElement.textContent =
@@ -22,4 +22,4 @@ function handleResult(result) {
     statusElement.textContent =
       "ページが完全に読み込まれたらストックのポップアップを表示してみてください（style-ss550tが見つかりませんでした）";
   }
-}
+};

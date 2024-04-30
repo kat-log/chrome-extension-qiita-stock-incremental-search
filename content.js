@@ -1,5 +1,5 @@
 // スタイルを追加するための関数
-function addStyle(styles) {
+const addStyle = (styles) => {
   let css = document.createElement("style");
   css.type = "text/css";
 
@@ -7,7 +7,7 @@ function addStyle(styles) {
   else css.appendChild(document.createTextNode(styles));
 
   document.getElementsByTagName("head")[0].appendChild(css);
-}
+};
 
 // スタイルを追加
 addStyle(
@@ -17,10 +17,25 @@ addStyle(
   ".chrome-extension-qiita-incremental-search-text { font-size: 16px; }"
 );
 
-let observer = new MutationObserver(function (mutations) {
-  mutations.forEach(function (mutation) {
+// フィルタリング関数
+const filterList = (event) => {
+  let filter = event.target.value.toUpperCase();
+  let ul = document.querySelector(".style-xntn0");
+  let li = ul.getElementsByTagName("li");
+  for (let i = 0; i < li.length; i++) {
+    let txtValue = li[i].textContent || li[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+};
+
+let observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
     if (mutation.addedNodes) {
-      mutation.addedNodes.forEach(function (node) {
+      mutation.addedNodes.forEach((node) => {
         if (node.nodeType === 1) {
           // ELEMENT_NODE
           let elements = node.getElementsByClassName("style-ss550t");
@@ -51,20 +66,6 @@ let observer = new MutationObserver(function (mutations) {
       });
     }
   });
-
-  function filterList(event) {
-    let filter = event.target.value.toUpperCase();
-    let ul = document.querySelector(".style-xntn0");
-    let li = ul.getElementsByTagName("li");
-    for (let i = 0; i < li.length; i++) {
-      let txtValue = li[i].textContent || li[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
-    }
-  }
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
