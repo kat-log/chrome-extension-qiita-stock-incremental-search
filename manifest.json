@@ -3,7 +3,7 @@
   "name": "Qiita ストック インクリメンタルサーチ",
   "description": "Qiitaの記事ストック時にインクリメンタルサーチできる拡張機能です。",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["scripting"],
   "host_permissions": ["https://qiita.com/*"],
   "action": {
     "default_icon": {
