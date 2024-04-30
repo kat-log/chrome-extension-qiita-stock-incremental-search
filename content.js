@@ -10,6 +10,9 @@ var observer = new MutationObserver(function (mutations) {
             var newDiv = document.createElement("div");
             newDiv.className = "chrome-extension-qiita-incremental-search";
             newDiv.textContent = "絞り込み：";
+            var input = document.createElement("input");
+            input.type = "text";
+            newDiv.appendChild(input);
             element.parentNode.insertBefore(newDiv, element.nextSibling);
           }
           var fallbackElements = node.getElementsByClassName("style-ymuwam");
