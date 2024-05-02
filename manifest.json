@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "My Custom Extension",
+  "name": "Qiita ストック インクリメンタルサーチ",
+  "description": "Qiitaの記事ストック時にインクリメンタルサーチできる拡張機能です。",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["scripting"],
   "host_permissions": ["https://qiita.com/*"],
   "action": {
     "default_icon": {
@@ -14,5 +15,10 @@
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   }
 }
