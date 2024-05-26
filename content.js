@@ -56,6 +56,7 @@ const checkElements = () => {
       newDiv.appendChild(newText);
       newDiv.appendChild(input);
       element.parentNode.insertBefore(newDiv, element.nextSibling);
+      input.focus();
     }
   }
 };
