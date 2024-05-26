@@ -11,10 +11,13 @@ const addStyle = (styles) => {
 
 // スタイルを追加
 addStyle(
-  ".chrome-extension-qiita-incremental-search { padding: 16px 16px 0px; }"
+  ".chrome-extension-qiita-incremental-search { padding: 16px 16px 0px; width: 100%; box-sizing: border-box; }"
 );
 addStyle(
   ".chrome-extension-qiita-incremental-search-text { font-size: 16px; }"
+);
+addStyle(
+  ".chrome-extension-qiita-incremental-search input { width: 100%; font-size: 16px;}"
 );
 
 // フィルタリング関数
