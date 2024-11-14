@@ -23,7 +23,7 @@ addStyle(
 // フィルタリング関数
 const filterList = (event) => {
   let filter = event.target.value.toUpperCase();
-  let ul = document.querySelector(".style-xntn0");
+  let ul = document.querySelector(".style-1db3q1");
   let li = ul.getElementsByTagName("li");
   for (let i = 0; i < li.length; i++) {
     let txtValue = li[i].textContent || li[i].innerText;
