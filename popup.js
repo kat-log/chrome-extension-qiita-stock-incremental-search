@@ -9,7 +9,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 });
 
 function checkElement() {
-  let elements = document.getElementsByClassName("style-ss550t");
+  let elements = document.getElementsByClassName("style-1w73du3");
   return elements.length > 0;
 }
 
@@ -17,9 +17,9 @@ let handleResult = (result) => {
   let statusElement = document.getElementById("status");
   if (result && result[0].result) {
     statusElement.textContent =
-      "ストックのポップアップ（style-ss550t）が見つかりました！フォームが表示されてない場合、ページが完全に読み込まれてから再度ポップアップしてみてください🙇🙇";
+      "ストックのポップアップ（style-1w73du3）が見つかりました！フォームが表示されてない場合、カテゴリー一覧のポップアップ表示後、数秒待ってみてください🙇";
   } else {
     statusElement.textContent =
-      "ページが完全に読み込まれたらストックのポップアップを表示してみてください（style-ss550tが見つかりませんでした）";
+      "ストックのポップアップを表示してみてください（style-1w73du3が見つかりませんでした）";
   }
 };

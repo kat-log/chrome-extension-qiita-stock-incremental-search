@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Qiita ストック インクリメンタルサーチ",
-  "description": "Qiitaの記事ストック時にインクリメンタルサーチできる拡張機能です。",
-  "version": "1.0",
+  "description": "Qiitaの記事ストック時に、カテゴリーの絞り込み検索ができるようになる拡張機能です。",
+  "version": "1.4",
   "permissions": ["scripting"],
   "host_permissions": ["https://qiita.com/*"],
   "action": {
