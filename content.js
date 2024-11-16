@@ -22,19 +22,24 @@ addStyle(
 
 // フィルタリング関数
 const filterList = (event) => {
-  let filter = event.target.value.toUpperCase();
-  let ul = document.querySelector(".style-1db3q1");
-  let li = ul.getElementsByTagName("li");
-  for (let i = 0; i < li.length; i++) {
-    let txtValue = li[i].textContent || li[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
+  try {
+    let filter = event.target.value.toUpperCase();
+    let ul = document.querySelector('ul[aria-label="カテゴリーを選ぶ"]');
+    if (!ul)
+      throw new Error(
+        "カテゴリーリストが見つかりません（「カテゴリーを選ぶ」というaria-labelがついたulが見つかりません）"
+      );
+
+    let li = ul.getElementsByTagName("li");
+    for (let i = 0; i < li.length; i++) {
+      let txtValue = li[i].textContent || li[i].innerText;
+      li[i].style.display =
+        txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
     }
+  } catch (error) {
+    console.error("フィルタリング中にエラーが発生しました:", error);
   }
 };
-
 // 要素をチェックし、必要なら新しいdivを挿入する関数
 const checkElements = () => {
   let elements = document.getElementsByClassName("style-1w73du3");
