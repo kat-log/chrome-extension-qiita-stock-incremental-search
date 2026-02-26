@@ -24,10 +24,10 @@ addStyle(
 const filterList = (event) => {
   try {
     let filter = event.target.value.toUpperCase();
-    let ul = document.querySelector('ul[aria-label="カテゴリーを選ぶ"]');
+    let ul = document.querySelector('ul[aria-label="ストックリストを選ぶ"]');
     if (!ul)
       throw new Error(
-        "カテゴリーリストが見つかりません（「カテゴリーを選ぶ」というaria-labelがついたulが見つかりません）"
+        "ストックリストが見つかりません（「ストックリストを選ぶ」というaria-labelがついたulが見つかりません）"
       );
 
     let li = ul.getElementsByTagName("li");
