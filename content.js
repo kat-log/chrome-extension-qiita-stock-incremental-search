@@ -1,3 +1,9 @@
+// 多重inject防止
+if (window.__qiitaIncrementalSearchInjected) {
+  throw new Error("already injected");
+}
+window.__qiitaIncrementalSearchInjected = true;
+
 // スタイルを追加するための関数
 const addStyle = (styles) => {
   let css = document.createElement("style");
