@@ -26,14 +26,21 @@ addStyle(
   ".chrome-extension-qiita-incremental-search input { width: 100%; font-size: 16px;}"
 );
 
+const STOCK_BTN_SELECTOR =
+  'button[aria-label="ストックする"][aria-expanded="true"], button[aria-label="ストックを編集する"][aria-expanded="true"]';
+
 // フィルタリング関数
 const filterList = (event) => {
   try {
     let filter = event.target.value.toUpperCase();
-    let ul = document.querySelector('ul[aria-label="ストックリストを選ぶ"]');
+    const stockBtn = document.querySelector(STOCK_BTN_SELECTOR);
+    if (!stockBtn) return;
+    const dialog = document.getElementById(stockBtn.getAttribute("aria-controls"));
+    if (!dialog) return;
+    let ul = dialog.querySelector('ul[aria-label="ストックリスト"]');
     if (!ul)
       throw new Error(
-        "ストックリストが見つかりません（「ストックリストを選ぶ」というaria-labelがついたulが見つかりません）"
+        "ストックリストが見つかりません（「ストックリスト」というaria-labelがついたulが見つかりません）"
       );
 
     let li = ul.getElementsByTagName("li");
@@ -48,28 +55,31 @@ const filterList = (event) => {
 };
 // 要素をチェックし、必要なら新しいdivを挿入する関数
 const checkElements = () => {
-  let elements = document.getElementsByClassName("style-1w73du3");
-  for (let i = 0; i < elements.length; i++) {
-    let element = elements[i];
-    if (
-      !element.nextSibling ||
-      element.nextSibling.className !==
-        "chrome-extension-qiita-incremental-search"
-    ) {
-      let newDiv = document.createElement("div");
-      newDiv.className = "chrome-extension-qiita-incremental-search";
-      let newText = document.createElement("span");
-      newText.className = "chrome-extension-qiita-incremental-search-text";
-      newText.textContent = "絞り込み：";
-      let input = document.createElement("input");
-      input.type = "text";
-      input.addEventListener("input", filterList);
-      newDiv.appendChild(newText);
-      newDiv.appendChild(input);
-      element.parentNode.insertBefore(newDiv, element.nextSibling);
-      input.focus();
-    }
-  }
+  const stockBtn = document.querySelector(STOCK_BTN_SELECTOR);
+  if (!stockBtn) return;
+
+  const dialogId = stockBtn.getAttribute("aria-controls");
+  const dialog = dialogId ? document.getElementById(dialogId) : null;
+  if (!dialog) return;
+
+  const list = dialog.querySelector('ul[aria-label="ストックリスト"]');
+  if (!list) return;
+
+  if (dialog.querySelector("#chrome-extension-qiita-incremental-search")) return;
+
+  let newDiv = document.createElement("div");
+  newDiv.id = "chrome-extension-qiita-incremental-search";
+  newDiv.className = "chrome-extension-qiita-incremental-search";
+  let newText = document.createElement("span");
+  newText.className = "chrome-extension-qiita-incremental-search-text";
+  newText.textContent = "絞り込み：";
+  let input = document.createElement("input");
+  input.type = "text";
+  input.addEventListener("input", filterList);
+  newDiv.appendChild(newText);
+  newDiv.appendChild(input);
+  list.parentNode.insertBefore(newDiv, list);
+  input.focus();
 };
 
 // 1秒ごとにcheckElementsを呼び出す
