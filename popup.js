@@ -9,17 +9,21 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 });
 
 function checkElement() {
-  let elements = document.getElementsByClassName("style-1w73du3");
-  return elements.length > 0;
+  const stockBtn = document.querySelector(
+    'button[aria-label="ストックする"], button[aria-label="ストックを編集する"]'
+  );
+  if (!stockBtn) return false;
+  const dialogId = stockBtn.getAttribute("aria-controls");
+  return dialogId ? !!document.getElementById(dialogId) : false;
 }
 
 let handleResult = (result) => {
   let statusElement = document.getElementById("status");
   if (result && result[0].result) {
     statusElement.textContent =
-      "ストックのポップアップ（style-1w73du3）が見つかりました！フォームが表示されてない場合、カテゴリー一覧のポップアップ表示後、数秒待ってみてください🙇";
+      "ストックのポップアップが見つかりました！フォームが表示されてない場合、カテゴリー一覧のポップアップ表示後、数秒待ってみてください🙇";
   } else {
     statusElement.textContent =
-      "ストックのポップアップを表示してみてください（style-1w73du3が見つかりませんでした）";
+      "ストックのポップアップを表示してみてください（ストックするボタンが見つかりませんでした）";
   }
 };
